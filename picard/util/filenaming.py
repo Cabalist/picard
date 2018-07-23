@@ -281,11 +281,8 @@ def _get_filename_limit(target):
         d = target
         while not os.path.exists(d):
             d = os.path.dirname(d)
-        # XXX http://bugs.python.org/issue18695
-        try:
-            limit = os.statvfs(d).f_namemax
-        except UnicodeEncodeError:
-            limit = os.statvfs(d.encode(_io_encoding)).f_namemax
+        limit = os.statvfs(d).f_namemax
+
         limits[target] = limit
     return limit
 

@@ -32,18 +32,6 @@ from functools import partial
 from itertools import chain
 from operator import attrgetter
 
-
-# A "fix" for https://bugs.python.org/issue1438480
-def _patched_shutil_copystat(src, dst, *, follow_symlinks=True):
-    try:
-        _orig_shutil_copystat(src, dst, follow_symlinks=follow_symlinks)
-    except OSError:
-        pass
-
-
-_orig_shutil_copystat = shutil.copystat
-shutil.copystat = _patched_shutil_copystat
-
 import picard.resources
 from picard.i18n import setup_gettext
 
